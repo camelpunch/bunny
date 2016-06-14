@@ -540,7 +540,7 @@ module Bunny
       opts[:content_type]  ||= DEFAULT_CONTENT_TYPE
       opts[:priority]      ||= 0
 
-      if @next_publish_seq_no > 0
+      if using_publisher_confirmations?
         @unconfirmed_set_mutex.synchronize do
           @unconfirmed_set.add(@next_publish_seq_no)
           @next_publish_seq_no += 1
